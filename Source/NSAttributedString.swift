@@ -14,23 +14,23 @@ typealias TextPathAttributes = [String:Any]
 /**
  Class represents single character representation - glyph
  */
-class TextPathGlyph {
-    typealias Index = String.UnicodeScalarView.Index
+public class TextPathGlyph {
+    public typealias Index = String.UnicodeScalarView.Index
     
     /// Character index in source string unicode view
-    fileprivate(set) var index: Index
+    public fileprivate(set) var index: Index
     
     /// Glyph path defined in glyph coordinates
-    fileprivate(set) var path: CGPath
+    public fileprivate(set) var path: CGPath
     
     /// Glyph path position (top left corner) in line space
-    fileprivate(set) var position: CGPoint
+    public fileprivate(set) var position: CGPoint
     
     /// Glyph line advance
-    fileprivate(set) var advance = CGSize.zero
+    public fileprivate(set) var advance = CGSize.zero
     
     /// Glyph origin offset (x component is a glyph origin offset, y component is an offset to baseline)
-    fileprivate(set) var originOffset = CGPoint.zero
+    public fileprivate(set) var originOffset = CGPoint.zero
     
     /// Glyph line run index
     fileprivate var lineRun: Int = 0
@@ -39,7 +39,7 @@ class TextPathGlyph {
     fileprivate weak var line: TextPathLine?
     
     /// Get glyph attributes as defined in source string
-    var attributes: [String:Any]? {
+    public var attributes: [String:Any]? {
         return line?.attributes(ForGlyph: self)
     }
     
@@ -53,33 +53,33 @@ class TextPathGlyph {
 /**
  Single text line representation
  */
-class TextPathLine {
+public class TextPathLine {
     
     /// Line index
-    fileprivate(set) var index: Int
+    public fileprivate(set) var index: Int
     
     /**
         Line typographic bounds based on line ascent / descent
      
         Rectangle is based on typographic line properties (ie. ascent, descent)
      */
-    fileprivate(set) var lineBounds = CGRect.zero
+    public fileprivate(set) var lineBounds = CGRect.zero
     
     /**
         Line path bounds based on text path
      
-        ### Rectangle defined by _textBounds_ is smaller than _lineBounds_ and is based only o text bounds ###
+        Rectangle defined by _textBounds_ is smaller than _lineBounds_ and is based only o text bounds
      */
-    fileprivate(set) var textBounds = CGRect.zero
+    public fileprivate(set) var textBounds = CGRect.zero
     
     /// Line leading
-    fileprivate(set) var leading = CGFloat(0.0)
+    public fileprivate(set) var leading = CGFloat(0.0)
     
     /// Line ascent
-    fileprivate(set) var ascent = CGFloat(0.0)
+    public fileprivate(set) var ascent = CGFloat(0.0)
     
     /// Line descent
-    fileprivate(set) var descent = CGFloat(0.0)
+    public fileprivate(set) var descent = CGFloat(0.0)
     
     /**
         Line effective descent is calculated based on lineRuns typographic properties,
@@ -100,7 +100,10 @@ class TextPathLine {
         In this case _effectiveDescent_ of the first line is smaller that _descent_ measured by CoreText, because it is calculated
         only based on visible characters (ie. not including '\n' metrics)
      */
-    fileprivate(set) var effectiveDescent = CGFloat(0.0)
+    public fileprivate(set) var effectiveDescent = CGFloat(0.0)
+    
+    /// Line effective ascent (read more above)
+    public fileprivate(set) var effectiveAscent = CGFloat(0.0)
     
     /// Line glyph to attributes mapping
     fileprivate var attributes: [TextPathAttributes]?
@@ -118,7 +121,7 @@ class TextPathLine {
      - Parameter line: Current text line
      - Parameter glyph: Current glyph
      */
-    func enumerateGlyphs(_ callback:(_ line: TextPathLine, _ glyph: TextPathGlyph) -> ()) {
+    public func enumerateGlyphs(_ callback:(_ line: TextPathLine, _ glyph: TextPathGlyph) -> ()) {
         for glyph in glyphs {
             callback(self, glyph)
         }
@@ -141,13 +144,13 @@ class TextPathLine {
  Text frame representation. This can represent a simple text rectangle (eq. UITextView text content),
  as well as a complex frame defined by CGPath
  */
-class TextPathFrame {
+public class TextPathFrame {
     
     /// Frame shape path (eq. textfield bounds rect)
-    fileprivate(set) var path: CGPath
+    public fileprivate(set) var path: CGPath
     
     /// Text frame lines
-    fileprivate(set) var lines = [TextPathLine]()
+    public fileprivate(set) var lines = [TextPathLine]()
     
     init(path: CGPath) {
         self.path = path
@@ -159,7 +162,7 @@ class TextPathFrame {
      - Parameter line: Current text line
      - Parameter glyph: Current glyph
      */
-    func enumerateGlyphs(_ callback: @escaping(_ line: TextPathLine, _ glyph: TextPathGlyph) -> ()) {
+    public func enumerateGlyphs(_ callback: @escaping(_ line: TextPathLine, _ glyph: TextPathGlyph) -> ()) {
         for line in lines {
             line.enumerateGlyphs(callback)
         }
@@ -169,24 +172,28 @@ class TextPathFrame {
 /**
  Text path represents a CGPath representation of text frame, glyphs and typographic properties
  */
-class TextPath {
+public class TextPath {
     
-    /// attributed text used to generate text path
-    fileprivate(set) var attributedString: NSAttributedString
+    /// Attributed text used to generate text path
+    public fileprivate(set) var attributedString: NSAttributedString
     
-    /// text path composed for input text
-    fileprivate(set) var composedPath: CGPath?
+    /// Text path composed for input text
+    public fileprivate(set) var composedPath: CGPath?
+    
+    /// Composed text path bounding box
+    public fileprivate(set) var composedBounds: CGRect
     
     /// text frames
-    fileprivate(set) var frames = [TextPathFrame]()
+    public fileprivate(set) var frames = [TextPathFrame]()
     
     init(text: NSAttributedString, path: CGPath? = nil) {
         self.attributedString = text
         self.composedPath = path
+        self.composedBounds = path?.boundingBoxOfPath ?? CGRect.zero
     }
 }
 
-extension NSAttributedString {
+public extension NSAttributedString {
     
     /**
         Creates a text path and a collection of text lines and 
@@ -197,7 +204,7 @@ extension NSAttributedString {
         - Parameter withPath: if _true_ a composed text path is included
         - Returns: created text path or NULL if failed
      */
-    func getTextPath(InBounds bounds:CGSize, withAttributes: Bool = false, withPath: Bool = true) -> TextPath? {
+    public func getTextPath(InBounds bounds:CGSize, withAttributes: Bool = false, withPath: Bool = true) -> TextPath? {
         let clearText = self.string
         if clearText.isEmpty {
             return nil
@@ -226,14 +233,14 @@ extension NSAttributedString {
         let path = CGMutablePath()
         
         if let lines = CTFrameGetLines(frame) as? [CTLine] {
+            var linesShift = CGFloat(0)
             var origins = [CGPoint](repeating: CGPoint.zero, count: lines.count)
             CTFrameGetLineOrigins(frame, CFRangeMake(0, lines.count), &origins)
             var originItr = origins.makeIterator()
-            
+
             for line in lines {
                 let lineOrigin = originItr.next() ?? CGPoint.zero
                 let tpLine = TextPathLine(index: lineIndex)
-                lineIndex += 1
 
                 tpLine.lineBounds = CTLineGetBoundsWithOptions(line, .excludeTypographicLeading)
                 tpLine.textBounds = CTLineGetBoundsWithOptions(line, .useGlyphPathBounds)
@@ -241,12 +248,13 @@ extension NSAttributedString {
                 let _ = CTLineGetTypographicBounds(line, &tpLine.ascent, &tpLine.descent, &tpLine.leading)
                 
                 if let lineRuns = CTLineGetGlyphRuns(line) as? [CTRun] {
-                    
                     if withAttributes {
                         tpLine.attributes = [TextPathAttributes](repeating:defaultAttributes, count: lineRuns.count)
                     }
                     
-                    var effectiveDescent = CGFloat(0.0)
+                    var effectiveDescent = CGFloat(0)
+                    var effectiveAscent = CGFloat(0)
+
                     var lineRunIndex = 0
                     for lineRun in lineRuns {
                         let glyphsCount = CTRunGetGlyphCount(lineRun)
@@ -278,6 +286,7 @@ extension NSAttributedString {
                                 unicodeIndex = unicodeScalars.index(after: unicodeIndex)
                                 
                                 if(!ignoredCharsSet.contains(unicodeScalars[glyphUnicodeIndex])) {
+                                    effectiveAscent = max(effectiveAscent, abs(rt_ascent))
                                     effectiveDescent = max(effectiveDescent, abs(rt_descent))
                                     
                                     let glyph = glyphPtr.pointee
@@ -314,17 +323,24 @@ extension NSAttributedString {
                         lineRunIndex += 1
                     }
                     
-                    tpLine.effectiveDescent = effectiveDescent
-                    for tpGlyph in tpLine.glyphs {
-                        let position = tpGlyph.position
-                        let offset = CGPoint(x: position.x, y: position.y - (tpLine.descent - tpLine.effectiveDescent))
-                        let T = CGAffineTransform(translationX: offset.x, y: offset.y)
-                        path.addPath(tpGlyph.path, transform: T)
-                        tpGlyph.position = offset
+                    if tpLine.glyphs.count != 0 {
+                        tpLine.effectiveAscent = effectiveAscent
+                        tpLine.effectiveDescent = effectiveDescent
+                        for tpGlyph in tpLine.glyphs {
+                            let position = tpGlyph.position
+                            let offset = CGPoint(x: position.x, y: position.y + (tpLine.ascent - tpLine.effectiveAscent) + linesShift)
+                            let T = CGAffineTransform(translationX: offset.x, y: offset.y)
+                            path.addPath(tpGlyph.path, transform: T)
+                            tpGlyph.position = offset
+                        }
+                        
+                        tpFrame.lines.append(tpLine)
+                        lineIndex += 1
                     }
+                    
+                    
+                    linesShift += (tpLine.ascent + tpLine.descent) - (effectiveAscent + effectiveDescent)
                 }
-                
-                tpFrame.lines.append(tpLine)
             }
         }
         
@@ -369,6 +385,7 @@ extension NSAttributedString {
         }
         
         let tp = TextPath(text: self, path: withPath ? finalPath : nil)
+        tp.composedBounds = finalPath.boundingBoxOfPath
         tp.frames.append(contentsOf: frames)
         return tp
     }
