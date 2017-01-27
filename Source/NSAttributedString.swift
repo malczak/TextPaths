@@ -350,7 +350,8 @@ public extension NSAttributedString {
         
         // 1. move path to (0,0) (and glyphs)
         pathBounds = path.boundingBoxOfPath
-        matrix = CGAffineTransform(translationX: -pathBounds.origin.x, y: -pathBounds.origin.y)
+        let pathOffset = pathBounds.origin
+        matrix = CGAffineTransform(translationX: -pathOffset.x, y: -pathOffset.y)
         if let copyPath = path.copy(using: &matrix) {
             finalPath = copyPath
             
@@ -385,7 +386,7 @@ public extension NSAttributedString {
         }
         
         let tp = TextPath(text: self, path: withPath ? finalPath : nil)
-        tp.composedBounds = finalPath.boundingBoxOfPath
+        tp.composedBounds = CGRect(origin: pathOffset, size: finalPath.boundingBoxOfPath.size)
         tp.frames.append(contentsOf: frames)
         return tp
     }
