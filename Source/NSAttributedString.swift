@@ -210,9 +210,10 @@ public extension NSAttributedString {
             return nil
         }
         
-        let defaultAttributes = [
-            NSFontAttributeName: UIFont.systemFont(ofSize: UIFont.systemFontSize),
-            NSForegroundColorAttributeName: UIColor.black
+        let fontAttributeKey = NSAttributedStringKey.font.rawValue
+        let defaultAttributes: [String:Any] = [
+            fontAttributeKey: UIFont.systemFont(ofSize: UIFont.systemFontSize),
+            NSAttributedStringKey.foregroundColor.rawValue: UIColor.black
         ]
 
         var lineIndex = 0
@@ -263,7 +264,7 @@ public extension NSAttributedString {
                         }
 
                         let attributes = (CTRunGetAttributes(lineRun) as? TextPathAttributes) ?? defaultAttributes
-                        let font = (attributes[NSFontAttributeName] as? UIFont) ?? (defaultAttributes[NSFontAttributeName] as! UIFont)
+                        let font = (attributes[fontAttributeKey] as? UIFont) ?? (defaultAttributes[fontAttributeKey] as! UIFont)
                         
                         if withAttributes {
                             tpLine.attributes![lineRunIndex] = attributes
