@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="0vA-CO-8jN">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="zLS-Og-tfq">
+            <objects>
+                <viewController id="0vA-CO-8jN" customClass="ViewController" customModule="TextToSVG" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gkg-1g-xWB">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" bouncesZoom="NO" editable="NO" text="In this example we use TextPaths to create SVG path from NSAttributedString and preview it in WKWebView" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="90j-ud-Mw2">
+                                <rect key="frame" x="97.5" y="89" width="219" height="70"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="WRd-hL-Jr7"/>
+                                    <constraint firstAttribute="width" constant="219" id="pYE-GO-K9u"/>
+                                </constraints>
+                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" usesAttributedText="YES" allowsEditingTextAttributes="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mNe-1n-gii">
+                                <rect key="frame" x="41.5" y="167" width="331" height="250"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="FJg-YH-cFw"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment content="What is Lorem Ipsum?">
+                                        <attributes>
+                                            <color key="NSColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <font key="NSFont" size="24" name=".SFNSText"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
+                                        <attributes>
+                                            <color key="NSColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <font key="NSFont" size="14" name=".AppleSystemUIFont"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <connections>
+                                    <outlet property="delegate" destination="0vA-CO-8jN" id="eAM-MS-75R"/>
+                                </connections>
+                            </textView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="output" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="grQ-Sd-T6V">
+                                <rect key="frame" x="41.5" y="444" width="331" height="345"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WHq-U3-1nS">
+                                <rect key="frame" x="41.5" y="444" width="331" height="345"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="SgD-Eh-34k">
+                                <rect key="frame" x="0.0" y="831" width="414" height="32"/>
+                                <segments>
+                                    <segment title="SVG source"/>
+                                    <segment title="SVG in WKWebView"/>
+                                </segments>
+                                <connections>
+                                    <action selector="switchChanged:" destination="0vA-CO-8jN" eventType="valueChanged" id="hzq-Ti-ev7"/>
+                                </connections>
+                            </segmentedControl>
+                        </subviews>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="RUs-a1-PjP" firstAttribute="trailing" secondItem="SgD-Eh-34k" secondAttribute="trailing" id="2zt-aN-seD"/>
+                            <constraint firstItem="WHq-U3-1nS" firstAttribute="top" secondItem="grQ-Sd-T6V" secondAttribute="top" id="8wu-Wl-hpa"/>
+                            <constraint firstItem="WHq-U3-1nS" firstAttribute="trailing" secondItem="grQ-Sd-T6V" secondAttribute="trailing" id="9UZ-NY-g9D"/>
+                            <constraint firstItem="mNe-1n-gii" firstAttribute="top" secondItem="90j-ud-Mw2" secondAttribute="bottom" constant="8" id="EM2-xf-1YQ"/>
+                            <constraint firstItem="grQ-Sd-T6V" firstAttribute="leading" secondItem="mNe-1n-gii" secondAttribute="leading" id="FjL-ud-qRV"/>
+                            <constraint firstItem="grQ-Sd-T6V" firstAttribute="top" secondItem="mNe-1n-gii" secondAttribute="bottom" constant="27" id="JfY-CF-jSr"/>
+                            <constraint firstItem="SgD-Eh-34k" firstAttribute="top" secondItem="grQ-Sd-T6V" secondAttribute="bottom" constant="42" id="L7v-td-dRW"/>
+                            <constraint firstItem="WHq-U3-1nS" firstAttribute="bottom" secondItem="grQ-Sd-T6V" secondAttribute="bottom" id="LwZ-iK-IQT"/>
+                            <constraint firstItem="90j-ud-Mw2" firstAttribute="centerX" secondItem="RUs-a1-PjP" secondAttribute="centerX" id="MQw-IE-HnN"/>
+                            <constraint firstItem="grQ-Sd-T6V" firstAttribute="trailing" secondItem="mNe-1n-gii" secondAttribute="trailing" id="NjM-e8-bj1"/>
+                            <constraint firstItem="RUs-a1-PjP" firstAttribute="bottom" secondItem="SgD-Eh-34k" secondAttribute="bottom" id="UqL-Yc-FtE"/>
+                            <constraint firstItem="WHq-U3-1nS" firstAttribute="leading" secondItem="grQ-Sd-T6V" secondAttribute="leading" id="eKO-nW-3Ub"/>
+                            <constraint firstItem="mNe-1n-gii" firstAttribute="width" secondItem="RUs-a1-PjP" secondAttribute="width" multiplier="0.8" id="jld-Qi-v3f"/>
+                            <constraint firstItem="90j-ud-Mw2" firstAttribute="top" secondItem="RUs-a1-PjP" secondAttribute="top" constant="45" id="m3s-sP-jTL"/>
+                            <constraint firstItem="mNe-1n-gii" firstAttribute="centerX" secondItem="RUs-a1-PjP" secondAttribute="centerX" id="sQs-s7-Bwc"/>
+                            <constraint firstItem="SgD-Eh-34k" firstAttribute="leading" secondItem="RUs-a1-PjP" secondAttribute="leading" id="u6L-zk-Ahk"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="RUs-a1-PjP"/>
+                    </view>
+                    <connections>
+                        <outlet property="svgTextView" destination="grQ-Sd-T6V" id="Los-Bg-eJg"/>
+                        <outlet property="textView" destination="mNe-1n-gii" id="KmV-WA-8LF"/>
+                        <outlet property="webView" destination="WHq-U3-1nS" id="AeZ-zk-CL8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WbA-VB-kbu" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="308.69565217391306" y="19.419642857142858"/>
+        </scene>
+    </scenes>
+</document>

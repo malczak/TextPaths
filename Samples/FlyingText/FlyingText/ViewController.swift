@@ -19,7 +19,9 @@ class ViewController: UIViewController {
         
         let attributedString = createSlogoText()
         let bounds = CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude)
-        textPath = attributedString.getTextPath(InBounds: bounds, withAttributes: true, withPath: false)
+        textPath = attributedString.getTextPath(InBounds: bounds,
+                                                withAttributes: true,
+                                                withPath: false)
     }
     
     override func viewDidAppear(_ animated: Bool) {
