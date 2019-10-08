@@ -1,0 +1,2 @@
+target 'TextToSVG'
+pod 'TextPaths', :path => './../..'
