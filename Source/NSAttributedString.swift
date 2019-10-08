@@ -9,7 +9,7 @@
 import UIKit
 import CoreGraphics
 
-typealias TextPathAttributes = [String:Any]
+typealias TextPathAttributes = [NSAttributedString.Key:Any]
 
 /**
  Class represents single character representation - glyph
@@ -39,7 +39,7 @@ public class TextPathGlyph {
     fileprivate weak var line: TextPathLine?
     
     /// Get glyph attributes as defined in source string
-    public var attributes: [String:Any]? {
+    public var attributes: [NSAttributedString.Key:Any]? {
         return line?.attributes(ForGlyph: self)
     }
     
@@ -59,16 +59,16 @@ public class TextPathLine {
     public fileprivate(set) var index: Int
     
     /**
-        Line typographic bounds based on line ascent / descent
+     Line typographic bounds based on line ascent / descent
      
-        Rectangle is based on typographic line properties (ie. ascent, descent)
+     Rectangle is based on typographic line properties (ie. ascent, descent)
      */
     public fileprivate(set) var lineBounds = CGRect.zero
     
     /**
-        Line path bounds based on text path
+     Line path bounds based on text path
      
-        Rectangle defined by _textBounds_ is smaller than _lineBounds_ and is based only o text bounds
+     Rectangle defined by _textBounds_ is smaller than _lineBounds_ and is based only o text bounds
      */
     public fileprivate(set) var textBounds = CGRect.zero
     
@@ -82,23 +82,23 @@ public class TextPathLine {
     public fileprivate(set) var descent = CGFloat(0.0)
     
     /**
-        Line effective descent is calculated based on lineRuns typographic properties,
-        in most cases is equal to _descent_.  In some rare cases this rect is smaller that _descent_ property.
-        
-        ## Example ##
-        ````
-        let str = NSMutableAttributedString(string: "First line".uppercased(), attributes: [
-            NSFontAttributeName: UIFont.systemFont(ofSize: 22, weight: UIFontWeightUltraLight)
-        ])
-        str.append(NSAttributedString(string: "\nSecond line".uppercased(), attributes: [
-            NSFontAttributeName: UIFont.systemFont(ofSize: 64, weight: UIFontWeightMedium)
-        ]))
-        ````
-        In second line much larger font is used, it also applied to the 'line break' (\n)
-        character. As a result typographic size of the first line is different that one used by TextKit to draw text
-        in text components (UILabel, UITextView).
-        In this case _effectiveDescent_ of the first line is smaller that _descent_ measured by CoreText, because it is calculated
-        only based on visible characters (ie. not including '\n' metrics)
+     Line effective descent is calculated based on lineRuns typographic properties,
+     in most cases is equal to _descent_.  In some rare cases this rect is smaller that _descent_ property.
+     
+     ## Example ##
+     ````
+     let str = NSMutableAttributedString(string: "First line".uppercased(), attributes: [
+     NSFontAttributeName: UIFont.systemFont(ofSize: 22, weight: UIFontWeightUltraLight)
+     ])
+     str.append(NSAttributedString(string: "\nSecond line".uppercased(), attributes: [
+     NSFontAttributeName: UIFont.systemFont(ofSize: 64, weight: UIFontWeightMedium)
+     ]))
+     ````
+     In second line much larger font is used, it also applied to the 'line break' (\n)
+     character. As a result typographic size of the first line is different that one used by TextKit to draw text
+     in text components (UILabel, UITextView).
+     In this case _effectiveDescent_ of the first line is smaller that _descent_ measured by CoreText, because it is calculated
+     only based on visible characters (ie. not including '\n' metrics)
      */
     public fileprivate(set) var effectiveDescent = CGFloat(0.0)
     
@@ -132,7 +132,7 @@ public class TextPathLine {
      - Parameter glyph: Glyph in line
      - Returns: Glyph attributes
      */
-    fileprivate func attributes(ForGlyph glyph: TextPathGlyph) -> [String:Any]? {
+    fileprivate func attributes(ForGlyph glyph: TextPathGlyph) -> TextPathAttributes? {
         if let attributes = attributes {
             return attributes[glyph.lineRun]
         }
@@ -196,29 +196,30 @@ public class TextPath {
 public extension NSAttributedString {
     
     /**
-        Creates a text path and a collection of text lines and 
-        glyphs with additional typographic informations (ie. ascent, descent, bounds)
+     Creates a text path and a collection of text lines and
+     glyphs with additional typographic informations (ie. ascent, descent, bounds)
      
-        - Parameter bounds: text bounding box
-        - Parameter withAttributes: if _true_ glyph attributes are included in returned TextPath
-        - Parameter withPath: if _true_ a composed text path is included
-        - Returns: created text path or NULL if failed
+     - Parameter bounds: text bounding box
+     - Parameter withAttributes: if _true_ glyph attributes are included in returned TextPath
+     - Parameter withPath: if _true_ a composed text path is included
+     - Returns: created text path or NULL if failed
      */
-    public func getTextPath(InBounds bounds:CGSize, withAttributes: Bool = false, withPath: Bool = true) -> TextPath? {
+    func getTextPath(InBounds bounds:CGSize, withAttributes: Bool = false, withPath: Bool = true) -> TextPath? {
         let clearText = self.string
         if clearText.isEmpty {
             return nil
         }
         
-        let defaultAttributes = [
-            NSFontAttributeName: UIFont.systemFont(ofSize: UIFont.systemFontSize),
-            NSForegroundColorAttributeName: UIColor.black
+        let fontAttributeKey = NSAttributedString.Key.font
+        let defaultAttributes: TextPathAttributes = [
+            fontAttributeKey: UIFont.systemFont(ofSize: UIFont.systemFontSize),
+            NSAttributedString.Key.foregroundColor: UIColor.black
         ]
-
+        
         var lineIndex = 0
         let unicodeScalars = clearText.unicodeScalars
         var unicodeIndex = unicodeScalars.startIndex
-
+        
         let frameSetter = CTFramesetterCreateWithAttributedString(self)
         let textRange = CFRangeMake(0, self.length)
         let frameSize = CTFramesetterSuggestFrameSizeWithConstraints(frameSetter, textRange, nil, bounds, nil)
@@ -237,11 +238,11 @@ public extension NSAttributedString {
             var origins = [CGPoint](repeating: CGPoint.zero, count: lines.count)
             CTFrameGetLineOrigins(frame, CFRangeMake(0, lines.count), &origins)
             var originItr = origins.makeIterator()
-
+            
             for line in lines {
                 let lineOrigin = originItr.next() ?? CGPoint.zero
                 let tpLine = TextPathLine(index: lineIndex)
-
+                
                 tpLine.lineBounds = CTLineGetBoundsWithOptions(line, .excludeTypographicLeading)
                 tpLine.textBounds = CTLineGetBoundsWithOptions(line, .useGlyphPathBounds)
                 
@@ -254,21 +255,21 @@ public extension NSAttributedString {
                     
                     var effectiveDescent = CGFloat(0)
                     var effectiveAscent = CGFloat(0)
-
+                    
                     var lineRunIndex = 0
                     for lineRun in lineRuns {
                         let glyphsCount = CTRunGetGlyphCount(lineRun)
                         if glyphsCount == 0 {
                             continue
                         }
-
+                        
                         let attributes = (CTRunGetAttributes(lineRun) as? TextPathAttributes) ?? defaultAttributes
-                        let font = (attributes[NSFontAttributeName] as? UIFont) ?? (defaultAttributes[NSFontAttributeName] as! UIFont)
+                        let font = (attributes[fontAttributeKey] as? UIFont) ?? (defaultAttributes[fontAttributeKey] as! UIFont)
                         
                         if withAttributes {
                             tpLine.attributes![lineRunIndex] = attributes
                         }
-
+                        
                         var rt_ascent = CGFloat(0.0)
                         var rt_descent = CGFloat(0.0)
                         var rt_leading = CGFloat(0.0)
@@ -319,7 +320,7 @@ public extension NSAttributedString {
                         default:
                             return nil
                         }
-                    
+                        
                         lineRunIndex += 1
                     }
                     

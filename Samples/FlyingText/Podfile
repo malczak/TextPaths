@@ -1,0 +1,2 @@
+target 'FlyingText'
+pod 'TextPaths', :path => './../..'

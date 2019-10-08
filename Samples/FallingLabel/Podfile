@@ -1,0 +1,2 @@
+target 'FallingLabel'
+pod 'TextPaths', :path => './../..'
