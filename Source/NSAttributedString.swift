@@ -250,7 +250,8 @@ public extension NSAttributedString {
                 
                 if let lineRuns = CTLineGetGlyphRuns(line) as? [CTRun] {
                     if withAttributes {
-                        tpLine.attributes = [TextPathAttributes](repeating:defaultAttributes, count: lineRuns.count)
+                        tpLine.attributes = [TextPathAttributes](repeating:defaultAttributes,
+                                                                 count: lineRuns.count)
                     }
                     
                     var effectiveDescent = CGFloat(0)
