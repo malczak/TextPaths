@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="10M-pY-bJ8">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="aV8-ox-L1n">
+            <objects>
+                <viewController id="10M-pY-bJ8" customClass="ViewController" customModule="TextDecompose" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="VLn-Ie-PT0">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" bouncesZoom="NO" editable="NO" text="In this example we use TextPaths to decompose NSAttributedString" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lRQ-Fp-bDf">
+                                <rect key="frame" x="97.5" y="89" width="219" height="70"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="tUo-Rd-HyW"/>
+                                    <constraint firstAttribute="width" constant="219" id="xcq-ek-U1f"/>
+                                </constraints>
+                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" usesAttributedText="YES" allowsEditingTextAttributes="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cI2-Lj-wEN">
+                                <rect key="frame" x="41.5" y="167" width="331" height="150"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="kD5-Jy-CeE"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment content="What is Lorem Ipsum?">
+                                        <attributes>
+                                            <color key="NSColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <font key="NSFont" size="24" name=".SFNSText"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+Lorem Ipsum is simply dummy </string>
+                                        <attributes>
+                                            <color key="NSColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <font key="NSFont" size="14" name=".AppleSystemUIFont"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="text">
+                                        <attributes>
+                                            <color key="NSColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <font key="NSFont" size="14" name="ArialNarrow"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" of the ">
+                                        <attributes>
+                                            <color key="NSColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <font key="NSFont" size="14" name=".AppleSystemUIFont"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="printing and typesetting">
+                                        <attributes>
+                                            <color key="NSColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <font key="NSFont" size="18" name=".SFNSText"/>
+                                            <font key="NSOriginalFont" size="18" name=".SFNSText"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" industry. ">
+                                        <attributes>
+                                            <color key="NSColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <font key="NSFont" size="14" name=".AppleSystemUIFont"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <connections>
+                                    <outlet property="delegate" destination="10M-pY-bJ8" id="Ra8-uO-CJK"/>
+                                </connections>
+                            </textView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g0A-qj-UuN">
+                                <rect key="frame" x="41.5" y="340" width="331" height="150"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZzH-bY-w6A">
+                                <rect key="frame" x="41.5" y="498" width="51" height="31"/>
+                                <connections>
+                                    <action selector="switchLineLeading:" destination="10M-pY-bJ8" eventType="valueChanged" id="N0N-t0-kPC"/>
+                                </connections>
+                            </switch>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l4s-s5-gbX">
+                                <rect key="frame" x="41.5" y="537" width="51" height="31"/>
+                                <connections>
+                                    <action selector="switchLineText:" destination="10M-pY-bJ8" eventType="valueChanged" id="mZ2-Xu-Jiw"/>
+                                </connections>
+                            </switch>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YEf-qJ-cMe">
+                                <rect key="frame" x="41.5" y="576" width="51" height="31"/>
+                                <connections>
+                                    <action selector="switchGlyphs:" destination="10M-pY-bJ8" eventType="valueChanged" id="3wJ-wi-YBn"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Draw line bounds (incl. leading)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cVO-eR-NXB">
+                                <rect key="frame" x="103" y="503" width="240" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Draw text line bounds " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X5G-3m-Fmk">
+                                <rect key="frame" x="103" y="542" width="170" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Draw individual glyphs bounds" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SCg-8d-q69">
+                                <rect key="frame" x="103" y="581" width="234" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="cI2-Lj-wEN" firstAttribute="top" secondItem="lRQ-Fp-bDf" secondAttribute="bottom" constant="8" id="3tY-hd-bkL"/>
+                            <constraint firstItem="SCg-8d-q69" firstAttribute="centerY" secondItem="YEf-qJ-cMe" secondAttribute="centerY" id="7cY-KN-A57"/>
+                            <constraint firstItem="lRQ-Fp-bDf" firstAttribute="top" secondItem="PYW-I0-gtV" secondAttribute="top" constant="45" id="8On-Ih-Hr2"/>
+                            <constraint firstItem="X5G-3m-Fmk" firstAttribute="centerY" secondItem="l4s-s5-gbX" secondAttribute="centerY" id="8p1-9e-qfN"/>
+                            <constraint firstItem="X5G-3m-Fmk" firstAttribute="leading" secondItem="cVO-eR-NXB" secondAttribute="leading" id="9HY-60-jrA"/>
+                            <constraint firstItem="SCg-8d-q69" firstAttribute="leading" secondItem="X5G-3m-Fmk" secondAttribute="leading" id="A6Y-Gl-end"/>
+                            <constraint firstItem="ZzH-bY-w6A" firstAttribute="leading" secondItem="g0A-qj-UuN" secondAttribute="leading" id="EBQ-21-Ctm"/>
+                            <constraint firstItem="g0A-qj-UuN" firstAttribute="width" secondItem="cI2-Lj-wEN" secondAttribute="width" id="JvO-zx-TtA"/>
+                            <constraint firstItem="YEf-qJ-cMe" firstAttribute="leading" secondItem="l4s-s5-gbX" secondAttribute="leading" id="L33-Kx-Zhe"/>
+                            <constraint firstItem="cI2-Lj-wEN" firstAttribute="centerX" secondItem="PYW-I0-gtV" secondAttribute="centerX" id="Pb5-nv-QpX"/>
+                            <constraint firstItem="l4s-s5-gbX" firstAttribute="top" secondItem="ZzH-bY-w6A" secondAttribute="bottom" constant="8" id="R6C-lb-QXO"/>
+                            <constraint firstItem="cVO-eR-NXB" firstAttribute="leading" secondItem="ZzH-bY-w6A" secondAttribute="trailing" constant="12.5" id="RYU-Rk-95V"/>
+                            <constraint firstItem="g0A-qj-UuN" firstAttribute="height" secondItem="cI2-Lj-wEN" secondAttribute="height" id="SkJ-KB-JZg"/>
+                            <constraint firstItem="l4s-s5-gbX" firstAttribute="leading" secondItem="ZzH-bY-w6A" secondAttribute="leading" id="Wo8-3E-jGO"/>
+                            <constraint firstItem="g0A-qj-UuN" firstAttribute="top" secondItem="cI2-Lj-wEN" secondAttribute="bottom" constant="23" id="gDf-hJ-jBt"/>
+                            <constraint firstItem="cI2-Lj-wEN" firstAttribute="width" secondItem="PYW-I0-gtV" secondAttribute="width" multiplier="0.8" id="h2C-kj-pBb"/>
+                            <constraint firstItem="ZzH-bY-w6A" firstAttribute="top" secondItem="g0A-qj-UuN" secondAttribute="bottom" constant="8" id="kHT-th-E7Q"/>
+                            <constraint firstItem="YEf-qJ-cMe" firstAttribute="top" secondItem="l4s-s5-gbX" secondAttribute="bottom" constant="8" id="oVh-f6-6yr"/>
+                            <constraint firstItem="g0A-qj-UuN" firstAttribute="leading" secondItem="cI2-Lj-wEN" secondAttribute="leading" id="qKp-RK-Kvb"/>
+                            <constraint firstItem="lRQ-Fp-bDf" firstAttribute="centerX" secondItem="PYW-I0-gtV" secondAttribute="centerX" id="qLX-UV-9ko"/>
+                            <constraint firstItem="cVO-eR-NXB" firstAttribute="top" secondItem="ZzH-bY-w6A" secondAttribute="bottom" constant="-26" id="w8s-Fh-z8v"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="PYW-I0-gtV"/>
+                    </view>
+                    <connections>
+                        <outlet property="container" destination="g0A-qj-UuN" id="dVC-yJ-Lph"/>
+                        <outlet property="textView" destination="cI2-Lj-wEN" id="6Yt-1D-Vjk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g4V-3H-q67" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="308.69565217391306" y="19.419642857142858"/>
+        </scene>
+    </scenes>
+</document>
