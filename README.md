@@ -1,6 +1,6 @@
 # TextPaths
 
-**TextPaths** is an utility for converting `NSAttributedText` to vector representation where each character of an input text is represented as a `CGPAth` glyph. **TextPaths** also returns typographic propeties for lines and entire text flow. For in-depth knowledge on how iOS handles text see '(Using Text Kit to Draw and Manage Text)[https://developer.apple.com/library/archive/documentation/StringsTextFonts/Conceptual/TextAndWebiPhoneOS/CustomTextProcessing/CustomTextProcessing.html]' chapter in documentation.
+**TextPaths** is an utility for converting `NSAttributedText` to vector representation where each character of an input text is represented as a `CGPAth` glyph. **TextPaths** also returns typographic propeties for lines and entire text flow. For in-depth knowledge on how iOS handles text see [Using Text Kit to Draw and Manage Text](https://developer.apple.com/library/archive/documentation/StringsTextFonts/Conceptual/TextAndWebiPhoneOS/CustomTextProcessing/CustomTextProcessing.html) chapter in documentation.
 
 Source `NSAttributedText` is converted into a tree like representation with char glyphs on leafs.
 
